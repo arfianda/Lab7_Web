@@ -33,7 +33,7 @@ Menyusun logic di `app/Controllers/User.php` yang menangani beberapa fungsi utam
 Membuat halaman login di `app/views/user/login.php` menggunakan HTML dan CSS. Halaman ini sudah dilengkapi dengan pesan peringatan (*flashdata*) jika user memasukkan email atau password yang salah.
 
 > 
-![Halaman Login][https://i.postimg.cc/9fy9cLRB/Screenshot-2026-04-07-181623.png]
+![Halaman Login](https://i.postimg.cc/9fy9cLRB/Screenshot-2026-04-07-181623.png)
 
 ### 5. Pengisian Data dengan Seeder
 Agar bisa melakukan uji coba login, data admin dibuat melalui fitur Seeder CodeIgniter:
