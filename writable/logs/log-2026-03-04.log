@@ -1,0 +1,26 @@
+CRITICAL - 2026-03-04 06:59:26 --> CodeIgniter\Exceptions\LogicException: No validation rules for the placeholder: "id". You must set the validation rules for the field. See <https://codeigniter4.github.io/userguide/libraries/validation.html#validation-placeholders>.
+[Method: POST, Route: admin/artikel/update/4]
+in SYSTEMPATH\Validation\Validation.php on line 803.
+ 1 SYSTEMPATH\Validation\Validation.php(155): CodeIgniter\Validation\Validation->fillPlaceholders()
+ 2 SYSTEMPATH\BaseModel.php(1594): CodeIgniter\Validation\Validation->run()
+ 3 APPPATH\Controllers\Artikel.php(271): CodeIgniter\BaseModel->validate()
+ 4 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Artikel->update()
+ 5 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 7 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb()
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\lab11_php_ci\\ci4\\public\\index.php')
+CRITICAL - 2026-03-04 06:59:31 --> CodeIgniter\Exceptions\LogicException: No validation rules for the placeholder: "id". You must set the validation rules for the field. See <https://codeigniter4.github.io/userguide/libraries/validation.html#validation-placeholders>.
+[Method: POST, Route: admin/artikel/update/4]
+in SYSTEMPATH\Validation\Validation.php on line 803.
+ 1 SYSTEMPATH\Validation\Validation.php(155): CodeIgniter\Validation\Validation->fillPlaceholders()
+ 2 SYSTEMPATH\BaseModel.php(1594): CodeIgniter\Validation\Validation->run()
+ 3 APPPATH\Controllers\Artikel.php(271): CodeIgniter\BaseModel->validate()
+ 4 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Artikel->update()
+ 5 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController()
+ 6 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest()
+ 7 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter()
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb()
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\laragon\\www\\lab11_php_ci\\ci4\\public\\index.php')
