@@ -22,6 +22,16 @@ $routes->get('/user', 'User::index');
 $routes->match(['get', 'post'], '/user/login', 'User::login');
 $routes->get('/user/logout', 'User::logout');
 
+// AJAX routes
+$routes->group('ajax', function ($routes) {
+    $routes->get('/', 'Ajax::index');
+    $routes->get('getData', 'Ajax::getData');
+    $routes->get('getDetail/(:num)', 'Ajax::getDetail/$1');
+    $routes->post('add', 'Ajax::add');
+    $routes->post('update/(:num)', 'Ajax::update/$1');
+    $routes->delete('delete/(:num)', 'Ajax::delete/$1');
+});
+
 // Admin routes
 $routes->group('admin', ['filter' => 'auth'], function ($routes) {
     $routes->get('artikel', 'Artikel::adminIndex');

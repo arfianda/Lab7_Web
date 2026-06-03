@@ -63,39 +63,111 @@ class Artikel extends BaseController
      */
 
     /**
-     * Display admin list of articles
+     * Display admin list of articles with AJAX support
      */
-    public function adminIndex(): string
+    public function adminIndex()
     {
+        $title = 'Kelola Artikel';
+        $model = new ArtikelModel();
+        $q = $this->request->getVar('q') ?? '';
+        $page = $this->request->getVar('page') ?? 1;
+        $sort = $this->request->getVar('sort') ?? 'created_at';
+        $order = $this->request->getVar('order') ?? 'DESC';
+
+        // Validate sort column to prevent SQL injection
+        $allowedSortColumns = ['id', 'judul', 'author', 'status', 'created_at'];
+        if (!in_array($sort, $allowedSortColumns)) {
+            $sort = 'created_at';
+        }
+
+        // Validate order
+        if (!in_array(strtoupper($order), ['ASC', 'DESC'])) {
+            $order = 'DESC';
+        }
+
+        $builder = $model->table('articles');
+
+        // Apply search filter
+        if ($q != '') {
+            $builder->like('judul', $q)->orLike('isi', $q);
+        }
+
+        // Apply sorting
+        $builder->orderBy($sort, $order);
+
+        // Paginate
         $perPage = 10;
+        $artikel = $builder->paginate($perPage, 'default', (int)$page);
+        $pager = $model->pager;
+
         $data = [
-            'title' => 'Kelola Artikel',
-            'articles' => $this->artikelModel->paginate($perPage),
-            'pager' => $this->artikelModel->pager,
+            'title' => $title,
+            'q' => $q,
+            'sort' => $sort,
+            'order' => $order,
+            'artikel' => $artikel,
+            'pager' => $pager
         ];
 
-        return view('artikel/admin_index', $data);
+        // Return JSON for AJAX requests
+        if ($this->request->isAJAX()) {
+            return $this->response->setJSON($data);
+        } else {
+            // Regular view response
+            return view('artikel/admin_index', $data);
+        }
     }
 
     /**
-     * Search articles
+     * Search articles with AJAX support
      */
-    public function search(): string
+    public function search()
     {
-        $keyword = $this->request->getGet('q');
-        $articles = [];
+        $keyword = $this->request->getVar('q') ?? '';
+        $page = $this->request->getVar('page') ?? 1;
+        $sort = $this->request->getVar('sort') ?? 'created_at';
+        $order = $this->request->getVar('order') ?? 'DESC';
+
+        // Validate sort column to prevent SQL injection
+        $allowedSortColumns = ['id', 'judul', 'author', 'status', 'created_at'];
+        if (!in_array($sort, $allowedSortColumns)) {
+            $sort = 'created_at';
+        }
+
+        // Validate order
+        if (!in_array(strtoupper($order), ['ASC', 'DESC'])) {
+            $order = 'DESC';
+        }
+
+        $model = new ArtikelModel();
+        $builder = $model->table('articles');
 
         if ($keyword) {
-            $articles = $this->artikelModel->search($keyword);
+            $builder->like('judul', $keyword)->orLike('isi', $keyword);
         }
+
+        $builder->orderBy($sort, $order);
+
+        $perPage = 10;
+        $artikel = $builder->paginate($perPage, 'default', (int)$page);
+        $pager = $model->pager;
 
         $data = [
             'title' => 'Cari Artikel: ' . $keyword,
-            'articles' => $articles,
-            'keyword' => $keyword,
+            'q' => $keyword,
+            'sort' => $sort,
+            'order' => $order,
+            'artikel' => $artikel,
+            'pager' => $pager
         ];
 
-        return view('artikel/admin_index', $data);
+        // Return JSON for AJAX requests
+        if ($this->request->isAJAX()) {
+            return $this->response->setJSON($data);
+        } else {
+            // Regular view response
+            return view('artikel/admin_index', $data);
+        }
     }
 
     /**
